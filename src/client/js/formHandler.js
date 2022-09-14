@@ -1,16 +1,21 @@
-function handleSubmit(event) {
-    event.preventDefault()
+import { validateText } from "./validateText";
+import axios from "axios";
 
-    // check what text was put into the form field
-    let formText = document.getElementById('name').value
-    checkForName(formText)
+const handleSubmit = async (event) => {
+  event.preventDefault();
 
-    console.log("::: Form Submitted :::")
-    fetch('http://localhost:8080/test')
-    .then(res => res.json())
-    .then(function(res) {
-        document.getElementById('results').innerHTML = res.message
-    })
-}
+  let formText = document.getElementById("inputText").value;
+  console.log("::: Form Submitted :::");
+  if (!validateText(formText)) return;
 
-export { handleSubmit }
+  const { data } = await axios.post("http://localhost:8080/test", {
+    text: formText,
+  });
+  document.getElementById("irony").innerHTML = `Irony: ${data.irony}`;
+  document.getElementById(
+    "subjectivity"
+  ).innerHTML = `Subjectivity: ${data.subjectivity}`;
+  document.getElementById("text").innerHTML = `Text: \n${formText}`;
+};
+
+export { handleSubmit };

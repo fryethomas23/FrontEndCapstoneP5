@@ -1,3 +1,7 @@
+import { handleSubmit } from "./formHandler";
+import { JSDOM } from "jsdom";
+
+const documentHTML = `
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head>
@@ -37,4 +41,17 @@
         </footer>
 
     </body>
-</html>
+</html>`;
+
+global.window = new JSDOM(documentHTML).window;
+global.document = global.window.document;
+
+test("adds server response to webpage", async () => {
+  document.getElementById("inputText").value = "test";
+  await handleSubmit(new window.Event("click"));
+  expect(document.getElementById("irony").textContent).toBe(`Irony: NONIRONIC`);
+  expect(document.getElementById("subjectivity").textContent).toBe(
+    `Subjectivity: OBJECTIVE`
+  );
+  expect(document.getElementById("text").textContent).toBe(`Text: \ntest`);
+});
