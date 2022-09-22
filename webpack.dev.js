@@ -40,10 +40,5 @@ module.exports = {
       skipWaiting: true,
     }),
     new Dotenv(),
-    // new webpack.DefinePlugin({
-    //   "process.env.PIXABAY_API_KEY": JSON.stringify(
-    //     process.env.PIXABAY_API_KEY
-    //   ),
-    // }),
   ],
 };
