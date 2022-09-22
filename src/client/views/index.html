@@ -1,40 +1,41 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-    <head>
-        <meta charset="utf-8">
-        <title>Test</title>
-    </head>
-
-    <body>
-
-        <header>
-            <div class="">
-                Logo
-            </div>
-            <div class="">
-                navigation
-            </div>
-        </header>
-
-        <main>
-            <section>
-                <form class="">
-                    <input id="inputText" type="text" name="input" value="" placeholder="Text">
-                    <input id="submit" type="submit" name="" value="submit">
-                </form>
-            </section>
-
-            <section>
-                <strong>Form Results:</strong>
-                <div id="irony"></div>
-                <div id="subjectivity"></div>
-                <div id="text"></div>
-            </section>
-        </main>
-
-        <footer>
-            <p>This is a footer</p>
-        </footer>
-
-    </body>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Travel Weather Forecast</title>
+    <link href="https://fonts.googleapis.com/css?family=Oswald:400,600,700|Ranga:400,700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+    <div id="background"></div>
+    <div id="app">
+      <div id="content">
+        <h1 class ="holder headline">
+          Travel Weather Forecast App
+        </h1>
+        <div class ="holder zip">
+          <label for="zip">Zipcode here</label>
+          <input type="text" id="zip" placeholder="Enter zip code">
+        </div>
+        <div class ="holder date">
+          <label for="date">Travel Date</label>
+          <input type id="date" placeholder="Enter date in MM/DD/YYYY"></input>
+        </div>
+        <div class ="holder button">
+          <button id="generate" type = "submit"> Get Forecast </button>
+        </div>
+        <div id='forecast' class ="holder">
+          <h1 id = "title"></h1>
+          <div id = "entryHolder">
+            <img id = "photo"/>
+            <div id = "city"></div>
+            <div id = "state"></div>
+            <div id = "timezone"></div>
+            <div id = "tempHigh"></div>
+            <div id = "tempLow"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
