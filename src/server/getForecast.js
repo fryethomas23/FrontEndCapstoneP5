@@ -14,6 +14,7 @@ const date = new Date();
 const oneWeek = 604800 * 1000; //milliseconds
 
 const getForecast = async (postalCode, travelDate) => {
+  // get postal code and travel date
   if (!postalCode) throw new Error("No postal code was provided.");
 
   travelDate = parseInt(travelDate);
@@ -25,6 +26,7 @@ const getForecast = async (postalCode, travelDate) => {
   if (travelDate - currentDayStartTimestamp < 0)
     throw new Error("travel date is in the past.");
 
+  // get geographical information
   const { data: geoResults } = await axios.get(
     `${geoNamesUrl}?postalcode=${postalCode}&country=US&maxRows=1&username=${geoNamesUsername}`
   );
@@ -32,9 +34,11 @@ const getForecast = async (postalCode, travelDate) => {
     res.status(400).send(`${postalCode} is an invalid postal code`);
   const { lng, lat, adminName1: stateName } = geoResults.postalCodes[0];
 
+  //determine weather to query for current weather forecast or future weather forecast
   let weatherExtension = weatherBitCurrent;
   if (travelDate - currentDayStartTimestamp > oneWeek)
     weatherExtension = weatherBitForecast;
+  //get weather information for the location
   const { data: weatherResults } = await axios.get(
     `${weatherBitUrl}${weatherExtension}?units=I&lon=${lng}&lat=${lat}&key=${weatherBitApiKey}`
   );

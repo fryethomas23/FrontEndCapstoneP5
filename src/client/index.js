@@ -17,6 +17,7 @@ generateButton.addEventListener("click", () => {
   }
   getForecast(zipCode, parseDate(date))
     .then((data) => {
+      //set ui with data from api
       document
         .getElementById("forecast")
         .setAttribute("style", "background-color: #9e9e9e");
@@ -42,3 +43,16 @@ generateButton.addEventListener("click", () => {
       console.log(err);
     });
 });
+
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker
+      .register("/service-worker.js")
+      .then((registration) => {
+        console.log("SW registered: ", registration);
+      })
+      .catch((registrationError) => {
+        console.log("SW registration failed: ", registrationError);
+      });
+  });
+}

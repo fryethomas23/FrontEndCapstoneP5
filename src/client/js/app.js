@@ -50,10 +50,12 @@ export const parseDate = (dateString) => {
 };
 
 export const getForecast = async (zipCode, travelDate) => {
+  // get forecast and location information
   const { data } = await axios.get(
     `${apiUrl}weather?postalCode=${zipCode}&travelDate=${travelDate}`
   );
 
+  //get picture for location
   const { data: pictureResults } = await axios.get(
     `${pixabayUrl}?q=${encodeURIComponent(
       data.stateName
